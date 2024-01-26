@@ -2,7 +2,7 @@ package com.FCarrena.demoparkapi.service;
 
 import com.FCarrena.demoparkapi.entity.Usuario;
 import com.FCarrena.demoparkapi.exception.EntityNotFoundException;
-import com.FCarrena.demoparkapi.exception.UsernameUniqueViolationExcption;
+import com.FCarrena.demoparkapi.exception.UsernameUniqueViolationException;
 import com.FCarrena.demoparkapi.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +28,7 @@ public Usuario salvar(Usuario usuario) {
           usuario.setPassword(passwordEnconder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     } catch (org.springframework.dao.DataIntegrityViolationException ex) {
-        throw new UsernameUniqueViolationExcption(String.format("username {%s} ja cadastrado", usuario.getUsername()));
+        throw new UsernameUniqueViolationException(String.format("username {%s} ja cadastrado", usuario.getUsername()));
     }
 }
 
