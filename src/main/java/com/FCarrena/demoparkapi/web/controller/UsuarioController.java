@@ -56,6 +56,7 @@ public ResponseEntity<UsuarioResponseDto> create(@Valid @RequestBody UsuarioCrea
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UsuarioResponseDto> getById(@PathVariable Long id){
 
         Usuario user = usuarioService.buscarPorId(id);
@@ -89,8 +90,6 @@ public ResponseEntity<UsuarioResponseDto> create(@Valid @RequestBody UsuarioCrea
                             content = @Content(mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = UsuarioResponseDto.class))))
             })
-
-
     @GetMapping
     public ResponseEntity <List <UsuarioResponseDto >> getAll(){
 
