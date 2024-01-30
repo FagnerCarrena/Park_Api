@@ -4,6 +4,7 @@ import com.FCarrena.demoparkapi.exception.EntityNotFoundException;
 import com.FCarrena.demoparkapi.exception.PasswordInvalidException;
 import com.FCarrena.demoparkapi.exception.UsernameUniqueViolationException;
 
+import com.FCarrena.demoparkapi.service.CpfuniqueVioletionException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -52,7 +53,7 @@ public class ApiExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
     }
 
-    @ExceptionHandler(UsernameUniqueViolationException.class)
+    @ExceptionHandler({UsernameUniqueViolationException.class, CpfuniqueVioletionException.class})
     public ResponseEntity<ErrorMessage> uniqueViolationException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity
