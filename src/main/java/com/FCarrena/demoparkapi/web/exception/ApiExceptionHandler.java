@@ -1,5 +1,6 @@
 package com.FCarrena.demoparkapi.web.exception;
 
+import com.FCarrena.demoparkapi.exception.CodigoUniqueVioletionException;
 import com.FCarrena.demoparkapi.exception.EntityNotFoundException;
 import com.FCarrena.demoparkapi.exception.PasswordInvalidException;
 import com.FCarrena.demoparkapi.exception.UsernameUniqueViolationException;
@@ -53,7 +54,7 @@ public class ApiExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
     }
 
-    @ExceptionHandler({UsernameUniqueViolationException.class, CpfuniqueVioletionException.class})
+    @ExceptionHandler({UsernameUniqueViolationException.class, CpfuniqueVioletionException.class, CodigoUniqueVioletionException.class})
     public ResponseEntity<ErrorMessage> uniqueViolationException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity
